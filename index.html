@@ -42,8 +42,77 @@
                 padding: 20px;
                 background-color: rgb(113, 195, 223);
             }
-         
         </style>
+
+        <script>
+             function validateEmail(){
+
+                var mail = document.getElementById('email')
+
+                    if(mail.value.match(/^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/))
+                    {
+                        alert("Valid Email Address.")
+                    }
+                    else{
+                        alert("Enter a valid Email Address.")
+                    }
+                }
+
+
+            function validate(){
+                var password = document.getElementById('pass');
+                var upper=document.getElementById('upper');
+                var lower=document.getElementById('lower');
+                var num=document.getElementById('number');
+                var len=document.getElementById('length');
+                var sc=document.getElementById('special_char');
+
+                //num
+                if(password.value.match(/[0-9]/)){
+                    num.style.color = 'green'
+                }
+                else{
+                    num.style.color = 'red'
+                }
+
+
+                //upper
+                if(password.value.match(/[A-Z]/)){
+                    upper.style.color = 'green'
+                }
+                else{
+                    upper.style.color = 'red'
+                }
+
+
+                //lower
+                if(password.value.match(/[a-z]/)){
+                    lower.style.color = 'green'
+                }
+                else{
+                    lower.style.color = 'red'
+                }
+
+
+                //special character
+
+                if(password.value.match(/[!@#$%^&*(){}|":?;/"+=<>.,]/)){
+                    special_char.style.color = 'green'
+                }
+                else{
+                    special_char.style.color = 'red'
+                }
+
+                if(password.value.length > 8){
+                    len.style.color = 'green'
+                }
+                else{
+                    len.style.color = 'red'
+                }
+
+
+            }
+        </script>
     </head>
 
     <body>
@@ -52,14 +121,20 @@
         <form>
             <div class="container">
                 <label>Username: </label>
-                <input type="text" placeholder="Enter Username" name="username" required>
+                <input id="email" type="text" placeholder="Enter Username" name="username" required>
 
                 <label>Password: </label>
-                <input type="password" placeholder="Enter Password" name="password" required>
-
-                <center><button type="submit">Login</button></center>
-            
-
+                <input id="pass" type="password" placeholder="Enter Password" name="password" onkeyup="return validate()" required>
+                <div class="errors">
+                    <ul>
+                        <li id="special_char">Atleast one special character</li>
+                        <li id="length">8 characters</li>
+                        <li id="number">Atleast one number</li>
+                        <li id='lower'>atleast one lower character</li>
+                        <li id='upper'>atleast one UPPER character</li>
+                    </ul>
+                </div>
+                <center><button onclick="return validateEmail(email.value)" type="submit">Login</button></center>
             </div>
         </form>
     </body>
